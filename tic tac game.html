@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Tok</title>
+    <style>
+        table
+        {
+            width: 450px;
+            height: 450px;
+           background-color: white;
+            margin: 50px auto;
+
+        }
+        table,tr,td{
+            border: 5px solid red;
+            border-collapse: collapse;
+        }
+        tr{
+            width: 450px;
+            height: 150px;
+        }
+        td{
+            height: 150px;
+            width: 150px;
+            font-size: 100px;
+            text-align: center;
+            line-height: 130px;
+        }
+    </style>
+    <script>
+         var gameStatus=true;
+           var cs=[2,2,2,2,2,2,2,2,2];
+           //currentState
+           var turn=0;
+           var wp=[[0,1,2],[3,4,5],[6,7,8],[0,3,8],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+           //winningPositino
+
+        function turnchange(i,e)
+        {
+          if(cs[i]==2)
+
+          {
+            audio2.play();
+            if(turn==0)
+            {
+                e.innerHTML="O";
+                turn=1;
+                cs[i]=0;
+            }
+            else{
+                e.innerHTML="X";
+                turn=0;
+                cs[i]=1;
+            }
+          }
+          // CHECK WINNING
+          var win=checkwin();
+          if(win==0)
+          {
+            // alert(" O Player win");
+            res.innerHTML=" O Player win";
+            page1.style.backgroundImage = "url('happy-birthday.gif')"
+            audio1.play();
+
+          }
+          else if(win==1)
+          {
+            // alert(" X Player win");
+            res.innerHTML=" X Player win";
+            page1.style.backgroundImage = "url('firecrackers-happy-diwali.gif')"
+            audio1.play();
+
+          }
+        }
+        function checkwin()
+        {
+            for(var r=0;r<8;r++)
+            {
+                var win=2;
+                if((cs[wp[r][0]]==cs[wp[r][1]]) && (cs[wp[r][1]]==cs[wp[r][2]]) && cs[wp[r][0]] !=2 )
+                {
+                    win=cs[wp[r][0]];
+                    break;
+
+
+                }
+            }
+            return win;
+        }
+    </script>
+    <style>
+        #res
+        {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body id="page1">
+    <!-- <audio src="relaxing-145038.mp3" id="audio1"></audio> -->
+    <audio src="Udja Kale Kawan - Search 128 Kbps.mp3" id="audio2"></audio>
+    <h1 id="res"></h1>
+    <table>
+        <tr>
+            <td onclick="turnchange(0,this)"></td>
+            <td onclick="turnchange(1,this)"></td>
+            <td onclick="turnchange(2,this)"></td>
+        </tr>
+        <tr>
+            <td onclick="turnchange(3,this)"></td>
+            <td onclick="turnchange(4 ,this)"></td>
+            <td onclick="turnchange(5 ,this)"></td>
+        </tr>
+        <tr>
+            <td onclick="turnchange(6 ,this)"></td>
+            <td onclick="turnchange(7 ,this)"></td>
+            <td onclick="turnchange(8 ,this)"></td>
+        </tr>
+    </table>
+</body>
+</html>
